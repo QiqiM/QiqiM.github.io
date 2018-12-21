@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hi! Yato
+title: Yato
 subtitle:
 description: my blog
 keywords: wait
@@ -73,7 +73,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+## theme: landscape
+theme: hexo-theme-spfk_x-master
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,3 +82,8 @@ deploy:
   type: git
   repo: https://github.com/qiqim/qiqim.github.io.git
   branch: master
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+plugin:
+- hexo-generator-feed #RSS订阅
