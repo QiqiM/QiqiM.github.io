@@ -2,7 +2,7 @@
 layout: _post
 title: C++实现双向链表
 date: 2019-6-25 10:43:13
-tags: [algorithm, C++，LinkList]
+tags: [algorithm, C++,LinkList]
 ---
 
 　　双向链表(双链表)是链表的一种。和单链表一样，双链表也是由节点组成，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表。
@@ -235,9 +235,8 @@ int DoubleLink<T>::delLast()
  
 #endif // !_LINK_LIST_H
 ```
-#### 双向链表测试文件
+#### 双向链表测试文件(LinkList.cpp)
 ```C++
-
 #include "pch.h"
 #include <iostream>
 #include <string>
