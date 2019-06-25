@@ -88,8 +88,3 @@ deploy:
 plugin:
 - hexo-generator-feed #RSS订阅
 
-# Automatically Excerpt. Not recommand.
-# Please use <!-- more --> in the post to control excerpt accurately.
-auto_excerpt:
-  enable: true
-  length: 150
