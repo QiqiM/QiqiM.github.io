@@ -6,7 +6,7 @@ tags: [php, array]
 
 ### 1.php中如何循环二维数组
 在php中，采用foreach循环来对二维索引数组进行遍历,下面的例子演示如何将三个关联数组，通过公有的key,在例子中是gid;组合成一个关联数组。
-
+<!--more-->
 #### a.初始化数据
 ```php
 $paylist = array(
