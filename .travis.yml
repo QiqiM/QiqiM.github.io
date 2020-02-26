@@ -38,6 +38,15 @@ script:
   - hexo generate
   - hexo deploy
 
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "QiqiM"
+  - git config user.email "2602231824@qq.com"
+  - git add .
+  - git commit -m "Travis CI Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
+  - git push --force --quiet "https://${GITHUB_TOKEN}@github.com/QiqiM/QiqiM.github.io" branches:hexo
+
 # configure notifications (email, IRC, campfire etc)
 # please update this section to your needs!
 # https://docs.travis-ci.com/user/notifications/
