@@ -23,6 +23,7 @@ before_install:
 #安装git插件和搜索功能插件
 install:
   - npm install
+  - npm install hexo-deployer-git --save
 
   # 设置git提交名，邮箱；替换真实token到_config.yml文件
 before_script:
