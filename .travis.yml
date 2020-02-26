@@ -1,29 +1,47 @@
-# 使用语言
-language: node_js
-# node版本
+# 指定构建环境是Node.js，当前版本是稳定版
+anguage: node_js
 node_js: stable
-# 设置只监听哪个分支
+
+env:
+ global:
+   - URL_REPO: github.com/QiqiM/QiqiM.github.io
+
+# 设置钩子只检测blog-source分支的push变动
 branches:
   only:
-  - hexo
-# 缓存，可以节省集成的时间，这里我用了yarn，如果不用可以删除
+    - hexo
+
+# 设置缓存文件
 cache:
-  apt: true
-  yarn: true
   directories:
     - node_modules
-# tarvis生命周期执行顺序详见官网文档
+
+#在构建之前安装hexo环境
 before_install:
-- git config --global user.name "QiqiM"
-- git config --global user.email "2602231824@qq.com"
-# 由于使用了yarn，所以需要下载，如不用yarn这两行可以删除
-- curl -o- -L https://yarnpkg.com/install.sh | bash
-- export PATH=$HOME/.yarn/bin:$PATH
-- npm install -g hexo-cli
+  - npm install -g hexo-cli
+
+#安装git插件和搜索功能插件
 install:
-# 不用yarn的话这里改成 npm i 即可
-- yarn
+  - npm install
+
+  # 设置git提交名，邮箱；替换真实token到_config.yml文件
+before_script:
+  - git config user.name "QiqiM"
+  - git config user.email "2602231824@qq.com"
+  # 替换同目录下的_config.yml文件中github_token字符串为travis后台刚才配置的变量，注>意此处sed命令用了双引号。单引号无效！
+  - sed -i "s/github_token/${GITHUB_TOKEN}/g" ../_config.yml || exit 1
+
+# 执行清缓存，生成网页操作
 script:
-- hexo clean
-- hexo generate
-- hexo deploy
+  - hexo clean
+  - hexo generate
+  - hexo deploy
+
+# configure notifications (email, IRC, campfire etc)
+# please update this section to your needs!
+# https://docs.travis-ci.com/user/notifications/
+notifications:
+  email:
+    - 2602231824@qq.com
+  on_success: change
+  on_failure: always
