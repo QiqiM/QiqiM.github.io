@@ -78,10 +78,10 @@ theme: Meadow
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  repo: https://github_token@github.com/QiqiM/QiqiM.github.io
-  branch: master
+# deploy:
+#   type: git
+#   repo: https://github_token@github.com/QiqiM/QiqiM.github.io
+#   branch: master
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
