@@ -21,15 +21,12 @@ menu:
   github:
     url: https://qiqim.github.io/
     target: _blank
-  weibo:
-    url: http://www.weibo.com/ysweb
+  bilibil:
+    url: https://space.bilibili.com/25621747/#/favlist
     target: _blank
-  link:
-    text: 测试
-    url: /custom
 
 # 你的头像url
-avatar: /img/avatar.jpg
+avatar: /img/Avatar.jpg
 # avatar link
 avatar_link: /
 # 头像背景图
