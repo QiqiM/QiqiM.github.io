@@ -76,48 +76,42 @@ pagination_dir: page
 ## theme: landscape
 theme: meadow
 
-menu:
-  tags: /tags/ || bookmark
+# menu:
+#   tags: /tags/ || bookmark
 
-comment:
-  use: #OPTION：gitalk; disqus; livere; valine; changyan; false
-  ## Gitalk
-  ### https://github.com/gitalk/gitalk
-  gitalk_client_id: 
-  gitalk_client_secret: 
-  gitalk_repo: 
-  gitalk_owner: 
-  gitalk_sid_type:  #Ensure uniqueness and length less than 50
-  gitalk_distractionFreeMode: #Facebook-like distraction free mode
-  ## Disqus
-  disqus_shortname:
-  ## Livere
-  livere_data_uid:
-  ## Valine
-  valine_leancloud_app_id:
-  valine_leancloud_app_key:
-  valine_placeholder:
-  valine_page_size:
-  valine_avatar:
-  valine_lang:
-  valine_guest_info:
-  valine_notify:
-  valine_verify:
-  ## 畅言
-  changyan_app_id:
-  changyan_app_key:
-  changyan_sid_type:
+# comment:
+#   use: #OPTION：gitalk; disqus; livere; valine; changyan; false
+#   ## Gitalk
+#   ### https://github.com/gitalk/gitalk
+#   gitalk_client_id: 
+#   gitalk_client_secret: 
+#   gitalk_repo: 
+#   gitalk_owner: 
+#   gitalk_sid_type:  #Ensure uniqueness and length less than 50
+#   gitalk_distractionFreeMode: #Facebook-like distraction free mode
+#   ## Disqus
+#   disqus_shortname:
+#   ## Livere
+#   livere_data_uid:
+#   ## Valine
+#   valine_leancloud_app_id:
+#   valine_leancloud_app_key:
+#   valine_placeholder:
+#   valine_page_size:
+#   valine_avatar:
+#   valine_lang:
+#   valine_guest_info:
+#   valine_notify:
+#   valine_verify:
+#   ## 畅言
+#   changyan_app_id:
+#   changyan_app_key:
+#   changyan_sid_type:
 
-busuanzi:
-  site: true
-  page: true
-  busuanzi_js: https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
-
-google_adsense:
-  enabled: true
-  footer: ../_adsense/footer.ejs
-  sidebar: ../_adsense/sidebar.ejs
-  banner: ../_adsense/banner.ejs
+# busuanzi:
+#   site: true
+#   page: true
+#   busuanzi_js: https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
   
 
 # Deployment
