@@ -74,14 +74,14 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 ## theme: landscape
-theme: next
+theme: Meadow
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
   repo: https://github_token@github.com/QiqiM/QiqiM.github.io
-  branch: master
+  branch: hexo
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
