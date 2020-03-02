@@ -3,13 +3,54 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Yato
-subtitle:
+title: yato
+subtitle: Learn
 description: 勤学如春起之苗,不见其增,日有所长
 keywords: wait
 author: yato
 language: zh-CN
+email: 2602231824@qq.com
+timezone: Asia/Shanghai
 
+feed:
+  type: atom
+  path: atom.xml
+  limit: 0
+
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: true
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true
+
+neat_enable: true
+neat_html:
+  enable: true
+  exclude:
+neat_css:
+  enable: true
+  exclude:
+    - '*.min.css'
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '*.min.js'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -74,7 +115,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/ 
 ## Themes: https://hexo.io/themes/
 ## theme: landscape
-theme: hexo-theme-meadow
+theme: indigo
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -82,8 +123,3 @@ deploy:
   type: git
   repo: https://github_token@github.com/QiqiM/QiqiM.github.io
   branch: master
-
-# Extensions
-## Plugins: https://hexo.io/plugins/
-plugin:
-- hexo-generator-feed #RSS订阅

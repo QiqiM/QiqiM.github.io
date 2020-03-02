@@ -1,5 +1,6 @@
 ---
 title: {{ title }}
 date: {{ date }}
-tags:
+categories: default tech
+tags: [hexo1,hexo2]
 ---
