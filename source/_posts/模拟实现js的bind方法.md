@@ -3,6 +3,7 @@ title: 模拟实现js的bind方法
 date: 2020-02-26 21:58:01
 tags: [JS, 深入js系列]
 ---
+
 ```js
 var obj = {};
 console.log(obj);
@@ -11,9 +12,11 @@ console.log(typeof Function.prototype.bind());  // function
 console.log(Function.prototype.bind.name);  // bind
 console.log(Function.prototype.bind().name);  // bound
 ```
+<!--more-->
+
 ![20200229141250imagepng](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200229141250-image.png)
 
-1. ####  bind是什么
+####  bind是什么
 
 + a. `bind` 是`Function`原型链中`Function.prototype`的一个函数，每个函数都可以调用它。
 
@@ -46,7 +49,7 @@ console.log((function(){}).bind().length)      // 0
 
 ![20200301155455imagepng](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200301155455-image.png)
 
-####  2. 进一步理解bind
+####   进一步理解bind
 
 + a. 调用`bind`的函数中的`this`指向`bind()`函数的第一个参数。
 + b. 函数`bind()`时传递的参数被bind接受处理，`bind()`完毕之后，程序调用返回的函数（**bound**）时，传递的参数也接收处理了，也就是在`bind()`内部合并处理了。
@@ -56,7 +59,7 @@ console.log((function(){}).bind().length)      // 0
 
 + e. `bind`函数的形参（即函数的`length`）是`1`。`bind`后返回的`bound函数形参不定`，根据绑定的函数原函数（`original`）形参个数决定。
 
-####  3.根据上面的两个例子，模拟实现一个简单版的`bindFn`
+####  根据上面的两个例子，模拟实现一个简单版的`bindFn`
 
 ```js
 Function.prototype.bindFn = function bindFake(thisArg){
@@ -94,7 +97,7 @@ let bound = original.bindFn(obj, 1)
 bound(2);  // 'yato', [1,2]
 ```
 
-#### 4.但是函数是可以使用`new`来实例化的。
+#### 但是函数是可以使用`new`来实例化的。
 
 ```js
  let obj = {name : 'yato'}
@@ -120,13 +123,13 @@ bound(2);  // 'yato', [1,2]
 + b.  new bound() 的返回值是以original原函数构造器生成的新对象。original原函数的this指向的就是这个新对象。
 
 + c.简要剖析下new做了什么
-  + 1. 创建一个全新的空对象
+    1. 创建一个全新的空对象
     2. 对这个对象指向原型链接（`instance.__proto__ = Class.prototype` ），其实`Class.prototype`就是`constructor`
     3. 生成的新对象会绑定到函数调用的this
     4. 通过new创建的每个对象最终被`[[prototype]]`链接这个函数的`prototype`上（参考2）
     5. 如果函数没有返回对象类型`Object`(包含`Function`, `Array`, `Date`, `RegExg`, `Error`),那么`new表达式`中的函数调用会自动返回这个新的对象
 
-##### 4.1所有相当于在new调用时，bind的返回值函数bound内部要实现new的操作
+##### 所以相当于在new调用时，bind的返回值函数bound内部要实现new的操作
 
 ```js
 // 第二版 实现new调用
@@ -197,7 +200,7 @@ let newBoundInvoke = new bound(2)
 console.log('newBoundInvoke: ', newBoundInvoke)
 ```
 
-#### 5. 总结
+####  总结
 
 + 1. `bind`是`Function`原型链中`Function.prototype`的一个属性，它是一个函数，修改`this指向`，合并参数传递给原函数，`返回值是一个新的函数`。
 + 2. `bind`返回的函数可以通过`new`调用，这是提供的`this参数被忽略`，指向了new生成的全新对象。`bind()`内部模拟实现了`new`操作符

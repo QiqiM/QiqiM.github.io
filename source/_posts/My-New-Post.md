@@ -1,7 +1,7 @@
 ---
 title: My New Post
 date: 2020-02-26 21:58:01
-tags:
+tags: [test]
 ---
 
 
@@ -27,4 +27,3 @@ class Sleep {
 })();
 ```
 
-#### yyyyyyyyyyyyyyyyyyy
