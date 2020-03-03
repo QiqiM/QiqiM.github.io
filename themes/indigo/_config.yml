@@ -21,7 +21,7 @@ menu:
   github:
     url: https://qiqim.github.io/
     target: _blank
-  bilibil:
+  bilibili:
     url: https://space.bilibili.com/25621747/#/favlist
     target: _blank
 
@@ -60,7 +60,7 @@ share: true
 
 # 是否开启打赏，关闭 reward: false
 reward:
-  title: 谢谢大爷~
+  title: 赠人玫瑰，手有余香
   wechat: /img/wechat.png     #微信，关闭设为 false
   alipay: /img/alipay.png     #支付宝，关闭设为 false
 
