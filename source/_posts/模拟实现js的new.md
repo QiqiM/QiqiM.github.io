@@ -1,5 +1,5 @@
 ---
-title: 模拟实现js的bind方法
+title: 模拟实现js的new
 date: 2020-03-15 17:01:01
 tags: [JS, 深入js系列]
 categories: JS
