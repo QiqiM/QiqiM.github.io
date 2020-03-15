@@ -2,6 +2,7 @@
 title: 模拟实现js的bind方法
 date: 2020-02-26 21:58:01
 tags: [JS, 深入js系列]
+categories: JS
 ---
 
 ```js
