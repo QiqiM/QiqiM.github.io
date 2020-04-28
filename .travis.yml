@@ -1,5 +1,5 @@
 # 指定构建环境是Node.js，当前版本是稳定版
-anguage: node_js
+language: node_js
 node_js: stable
 
 env:
