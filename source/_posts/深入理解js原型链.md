@@ -6,7 +6,7 @@ categories: JS
 ---
 
 #### 概念
-> 每个函数对象（构造函数constructor）都有一个原型对象属性（prototype），实例对象没有，指向`prototype {}`对象，原型对象都包含一个指向构造函数的指针。实例对象包含一个指向原型对象的内部指针`[[prototype]]`，在浏览器和Node中实现为__proto__。一图胜千言，直接上图
+> 每个函数对象（构造函数constructor）都有一个原型对象属性（prototype），实例对象没有，指向`prototype {}`对象，原型对象都包含一个指向构造函数的指针。实例对象包含一个指向原型对象的内部指针`[[prototype]]`，在浏览器和Node中实现为`__proto__`。一图胜千言，直接上图
 
 <!--more-->
 
