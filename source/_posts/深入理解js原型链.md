@@ -34,7 +34,7 @@ Cat.prototype
 
 console.log(mycat.__proto__ === Cat.prototype)  // true
 
-Cat.prototype.constructor
+Cat.prototype.constructor 
 // f () {} ==> 指向函数对象本身（构造函数）
 ```
 ![__proto__和prototype关系](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200428112245-image.png)
