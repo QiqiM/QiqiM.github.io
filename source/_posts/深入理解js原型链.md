@@ -59,7 +59,7 @@ Object.__proto === Function.prototype
 
 Function.prototype.__proto__  === Object.prototype
 ```
-> ![Object原型查看](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200428114152-image.png)
+![Object原型查看](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200428114152-image.png)
 
 ![Object原型查看](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200428114655-image.png)
 
