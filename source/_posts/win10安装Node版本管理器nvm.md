@@ -78,3 +78,24 @@ nvm安装位置，看自己决定，但是安装路径不能有空格，比如`P
 | nvm use 12.14.1       | 使用指定版本Node              |
 | nvm uninstall 10.15.3 | 卸载指定版本Node              |
 
+#### 使用nvm引发的问题
+
++ 全局安装的包找不到了，我之前有修改过我的全局包安装位置
+
+```
+npm config set prefix "F:\nodejs\node global"
+npm config set cache "F:\nodejs\node cache"
+```
+
+因为卸载之前Node的时候，以前设置的Node环境变量也被清掉了，需要重新设置
+
+![system path](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200520143623-image.png)
+
+再增加一个环境变量
+
+![NODE_PATH](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200520143642-image.png)
+
+设置完之后，重开gitbash
+
+![git_bash](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200520143842-image.png)
+
