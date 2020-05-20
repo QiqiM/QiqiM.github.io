@@ -66,7 +66,7 @@ nvm安装位置，看自己决定，但是安装路径不能有空格，比如`P
 
 > nvm uninstall 10.15.3      // 卸载指定版本Node
 
-
+![uninstall](https://raw.githubusercontent.com/QiqiM/yato-GitNote/master/20200520130130-image.png)
 
 #### 常用命令
 
