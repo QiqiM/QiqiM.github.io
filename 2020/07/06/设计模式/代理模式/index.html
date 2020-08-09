@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>代理模式 | yato | 苟有恒,何必三更起五更眠; 最无益,莫过一日曝十日寒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计模式,js,结构型模式">
+    <meta name="description" content="1.代理模式的定义 为其他对象提供一种代理，用来控制这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用  使用场景 图片懒加载 防止用户频繁请求（一定时间内，多次请求按一次计算） 数据的缓存（比如业务中不好获取的数据，可以将该数据代理到app上，或者user身上，这样在整个程序中都可以很方便的访问）  优缺点 优点：代理模式能">
+<meta name="keywords" content="设计模式,js,结构型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代理模式">
+<meta property="og:url" content="https://github.com/QiqiM/2020/07/06/设计模式/代理模式/index.html">
+<meta property="og:site_name" content="yato">
+<meta property="og:description" content="1.代理模式的定义 为其他对象提供一种代理，用来控制这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用  使用场景 图片懒加载 防止用户频繁请求（一定时间内，多次请求按一次计算） 数据的缓存（比如业务中不好获取的数据，可以将该数据代理到app上，或者user身上，这样在整个程序中都可以很方便的访问）  优缺点 优点：代理模式能">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-09T05:24:32.368Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代理模式">
+<meta name="twitter:description" content="1.代理模式的定义 为其他对象提供一种代理，用来控制这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用  使用场景 图片懒加载 防止用户频繁请求（一定时间内，多次请求按一次计算） 数据的缓存（比如业务中不好获取的数据，可以将该数据代理到app上，或者user身上，这样在整个程序中都可以很方便的访问）  优缺点 优点：代理模式能">
+    
+        <link rel="alternate" type="application/atom+xml" title="yato" href="/QiqiM.github.io/atom.xml">
+    
+    <link rel="shortcut icon" href="/QiqiM.github.io/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/QiqiM.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/QiqiM.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/QiqiM.github.io/img/avatar1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">yato</h5>
+          <a href="mailto:2602231824@qq.com" title="2602231824@qq.com" class="mail">2602231824@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://qiqim.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://space.bilibili.com/25621747/#/favlist" target="_blank" >
+                <i class="icon icon-lg icon-bilibili"></i>
+                Bilibili
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">代理模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">代理模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-07-06T13:30:01.000Z" itemprop="datePublished" class="page-time">
+  2020-07-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/QiqiM.github.io/categories/设计模式/">设计模式</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-代理模式的定义"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.代理模式的定义</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#使用场景"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用场景</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#优缺点"><span class="post-toc-number">3.</span> <span class="post-toc-text">优缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#JavaScript开发中最常用的是虚拟代理和缓存代理。"><span class="post-toc-number"></span> <span class="post-toc-text">JavaScript开发中最常用的是虚拟代理和缓存代理。</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#虚拟代理"><span class="post-toc-number"></span> <span class="post-toc-text">虚拟代理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缓存代理"><span class="post-toc-number"></span> <span class="post-toc-text">缓存代理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ES6中的代理Proxy"><span class="post-toc-number"></span> <span class="post-toc-text">ES6中的代理Proxy</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#举个栗子"><span class="post-toc-number">1.</span> <span class="post-toc-text">举个栗子</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#handler的内建方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">handler的内建方法</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-设计模式/代理模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">代理模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-07-06 21:30:01" datetime="2020-07-06T13:30:01.000Z"  itemprop="datePublished">2020-07-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/QiqiM.github.io/categories/设计模式/">设计模式</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h5 id="1-代理模式的定义"><a href="#1-代理模式的定义" class="headerlink" title="1.代理模式的定义"></a>1.代理模式的定义</h5><blockquote>
+<p>为其他对象提供一种代理，用来控制这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用</p>
+</blockquote>
+<h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><ul>
+<li>图片懒加载</li>
+<li>防止用户频繁请求（一定时间内，多次请求按一次计算）</li>
+<li>数据的缓存（比如业务中不好获取的数据，可以将该数据代理到app上，或者user身上，这样在整个程序中都可以很方便的访问）</li>
+</ul>
+<h5 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h5><ul>
+<li>优点：代理模式能将代理对象与被调用对象分离，降低了系统的耦合度。代理模式在客户端和目标对象之间起到一个中介对象，这样可以起到保护对象的作用。代理对象也可以对目标对象调用之前进行其他操作。</li>
+<li>缺点：增加了系统的复杂度</li>
+</ul>
+<h4 id="JavaScript开发中最常用的是虚拟代理和缓存代理。"><a href="#JavaScript开发中最常用的是虚拟代理和缓存代理。" class="headerlink" title="JavaScript开发中最常用的是虚拟代理和缓存代理。"></a>JavaScript开发中最常用的是<strong>虚拟代理</strong>和<strong>缓存代理</strong>。</h4><h4 id="虚拟代理"><a href="#虚拟代理" class="headerlink" title="虚拟代理"></a>虚拟代理</h4><p> 根据需要创建开销很大的对象，通过它来存放实例化需要很长时间的真实对象，比如浏览器的渲染的时候先显示问题，而图片可以慢慢显示（就是通过虚拟代理代替了真实的图片，此时虚拟代理保存了真实图片的路径和尺寸。用虚拟代理实现图片预加载代码实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 图片加载函数</span></span><br><span class="line">  <span class="keyword">var</span> myImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>)</span><br><span class="line">      <span class="built_in">document</span>.body.appendChild(imgNode)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">          setSrc: <span class="function"><span class="keyword">function</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">              imgNode.src = src</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;)()</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 引入代理对象</span></span><br><span class="line"> <span class="keyword">var</span> proxyImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">var</span> img = <span class="keyword">new</span> Image</span><br><span class="line">     img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="comment">// 图片加载完成，正式加载图片</span></span><br><span class="line">         myImage.setSrc( <span class="keyword">this</span>.src )</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> &#123;</span><br><span class="line">         setSrc: <span class="function"><span class="keyword">function</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">             <span class="comment">// 图片未被载入时，加载一张提示图片</span></span><br><span class="line">             myImage.setSrc(<span class="string">'file://c:/loading.png'</span>)</span><br><span class="line">             img.src = src</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;)()</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 调用代理对象加载图片</span></span><br><span class="line"> proxyImage.setSrc( <span class="string">'http://images/qq.jpg'</span>)</span><br></pre></td></tr></table></figure>
+<p> proxyImage 间接地访问MyImage。proxyImage 控制了客户对MyImage 的访问，并且在此过程中加入一些额外的操作（真正的图片加载好之前，先把img 节点的src 设置为一张本地的loading 图片）。看完这段代码之后我们会立马思考一个问题，不使用代理模式我们照样可以实现图片的预加载功能，无非就是在MyImage的setSrc方法中加上图片加载完成监听以及加载本地提示图片这两部分代码，为什么要使用代理模式反而把实现变得复杂了？</p>
+<p> 思考两个问题：</p>
+<p> 一、对于MyImage的setSrc函数来说职责过多，既要给img设置src，又要负责预加载图片，违反了面向对象设计原则中的<strong>单一职责原则</strong>；</p>
+<p> 二、如果后期我们考虑撤销图片预加载功能，就要去修改MyImage的setSrc方法，违反了<strong>开闭原则</strong>；</p>
+<p>分析了上面两个问题后，代理模式恰好能规避掉这两个问题，此时就体现出了设计模式的优点。</p>
+<h4 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h4><p> 缓存代理可以为一些开销大的运算结果提供暂时的存储，在下次运算时，如果传递进来的参数跟之前一致，则可以直接返回前面存储的运算结果。使用缓存代理实现运算结果缓存代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; l; i++)&#123;</span><br><span class="line">        sum += <span class="built_in">arguments</span>[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> proxyAdd = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cache = &#123;&#125; <span class="comment">//缓存运算结果的缓存对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.join.call(<span class="built_in">arguments</span>)<span class="comment">//把参数用逗号组成一个字符串作为“键”</span></span><br><span class="line">        <span class="keyword">if</span>(cache.hasOwnProperty(args))&#123;<span class="comment">//等价 args in cache</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'使用缓存结果'</span>)</span><br><span class="line">            <span class="keyword">return</span> cache[args]<span class="comment">//直接使用缓存对象的“值”</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'计算结果'</span>)</span><br><span class="line">        <span class="keyword">return</span> cache[args] = add.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>)<span class="comment">//使用本体函数计算结果并加入缓存</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="built_in">console</span>.log(proxyAdd(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))</span><br><span class="line"><span class="built_in">console</span>.log(proxyAdd(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))</span><br><span class="line"><span class="built_in">console</span>.log(proxyAdd(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">计算结果</span><br><span class="line"><span class="number">15</span></span><br><span class="line">使用缓存结果</span><br><span class="line"><span class="number">15</span></span><br><span class="line">使用缓存结果</span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+<p> 通过增加缓存代理的方式，add 函数可以继续专注于自身的职责——计算传入参数的和，缓存的功能是由代理对象实现的。</p>
+<h4 id="ES6中的代理Proxy"><a href="#ES6中的代理Proxy" class="headerlink" title="ES6中的代理Proxy"></a>ES6中的代理Proxy</h4><p> ES6原生提供了Proxy构造函数，主要作用是在目标对象之前架设一层<strong>拦截</strong>，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。其主要的思想还是设计模式，下面我们就来学习一下如何使用Proxy。</p>
+<p> Proxy是一个构造函数，它可以接受两个参数：目标对象（target） 与句柄对象（handler） ，返回一个代理对象Proxy，主要用于从外部控制对对象内部的访问。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;&#125;, handler = &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Proxy、target、handler这三者之间有什么关系呢？</strong></p>
+<p>Proxy的行为很简单：将Proxy的所有内部方法转发至target 。即调用Proxy的方法就会调用target上对应的方法。</p>
+</li>
+<li><p><strong>handler是用来干嘛的？</strong></p>
+<p>handler的方法可以覆写任意代理的内部方法。 外界每次通过Proxy访问<code>target</code> 对象的属性时，就会经过 <code>handler</code> 对象，因此，我们可以通过重写handler对象中的一些方法来做一些拦截的操作。</p>
+</li>
+</ul>
+<h5 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let user = &#123;</span><br><span class="line">    username: &apos;zhangsan&apos;,</span><br><span class="line">    password: &apos;123456&apos;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var userProxy = new Proxy(user,&#123;</span><br><span class="line">    get: function(target, property, receiver)&#123;</span><br><span class="line">        console.log(`你访问了user的$&#123;property&#125;属性`)</span><br><span class="line">        return target[prop]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">console.log(userProxy.username)</span><br><span class="line">// 你访问了user的username属性 </span><br><span class="line">// zhangsan</span><br></pre></td></tr></table></figure>
+<p> 如上面的代码，我们访问并输出了username属性，但是运行结果确又额外的输出了js我们在<code>handler</code>的get方法中预先输出的一句话，这就是拦截器的作用。</p>
+<h5 id="handler的内建方法"><a href="#handler的内建方法" class="headerlink" title="handler的内建方法"></a>handler的内建方法</h5><p> 相信看了上面代码大家还有一个疑问，get方法是什么？get方法是handler对象的14个内建方法之一，我们可以通过重写这些内建方法来自定义拦截器的内容。handler对象拥有以下14个内建对象（我只举四个常用的，其他的请参考博客<a href="https://blog.csdn.net/qq_28506819/article/details/71077788" target="_blank" rel="noopener">深度揭秘ES6代理Proxy</a>）：</p>
+<ol>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handler.get(target, property, receiver)</span><br></pre></td></tr></table></figure>
+<p>方法用于拦截对象的读取属性操作</p>
+<ul>
+<li>target，目标对象</li>
+<li>property，被获取的属性名</li>
+<li>receiver，Proxy或者继承Proxy的对象</li>
+</ul>
+</li>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handler.set(target, property, value, receiver)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   方法用于拦截设置属性值的操作</p>
+<ul>
+<li>target，目标对象</li>
+<li>property，被设置的属性名</li>
+<li>value，被设置的新值</li>
+<li>receiver，最初被调用的对象。通常是proxy本身，但handler的set方法也有可能在原型链上或以其他方式被间接地调用（因此不一定是proxy本身）</li>
+</ul>
+<ol start="3">
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handler.apply(target, thisArg, argumentsList)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   方法用于拦截函数的调用</p>
+<ul>
+<li>target，目标对象（函数）</li>
+<li>thisArg，被调用时的上下文对象</li>
+<li>argumentsList，被调用时的参数列表</li>
+</ul>
+<ol start="4">
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handler.construct(target, argumentsList, newTarget)</span><br></pre></td></tr></table></figure>
+<p>用于来接new操作</p>
+<ul>
+<li>target，目标对象</li>
+<li>argumensList，构造器参数列表</li>
+<li>newTarget，最初调用的构造函数</li>
+</ul>
+</li>
+</ol>
+<p><strong>下面我们就来用ES6语法对虚拟代理例子进行重写</strong></p>
+<ul>
+<li>虚拟代理</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myImage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(document) &#123;</span><br><span class="line">        <span class="keyword">this</span>.imgNode = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>)</span><br><span class="line">      <span class="built_in">document</span>.body.appendChild(imgNode)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    setSrc() &#123;</span><br><span class="line">        imgNode.src = src</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myImageProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(myImage, &#123;</span><br><span class="line">    apply(target, ctx, <span class="built_in">arguments</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> img = <span class="keyword">new</span> Image</span><br><span class="line">        img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 图片加载完成，正式加载图片</span></span><br><span class="line">        target.call(ctx, ...arguments)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 图片未被载入时，加载一张提示图片</span></span><br><span class="line">        target.call(ctx, <span class="string">'file://c:/loading.png'</span>)</span><br><span class="line">        img.src = <span class="built_in">arguments</span>[<span class="number">0</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="keyword">let</span> myImg = <span class="keyword">new</span> myImageProxy(<span class="built_in">document</span>)</span><br><span class="line">myImg.setSrc(<span class="string">'http://images/qq.jpg'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>缓存代理</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Add</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(arguments) &#123;</span><br><span class="line">        <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; l; i++)&#123;</span><br><span class="line">            sum += <span class="built_in">arguments</span>[i]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> AddProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(Add, &#123;</span><br><span class="line">    construct(target, <span class="built_in">arguments</span>, newTarget) &#123; <span class="comment">// newTarget最初的构造函数</span></span><br><span class="line">        <span class="keyword">let</span> cache = target.cache <span class="comment">// 从Add类中取出静态属性cache(缓存运算结果的缓存对象)</span></span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.join.call(<span class="built_in">arguments</span>);<span class="comment">//把参数用逗号组成一个字符串作为“键”</span></span><br><span class="line">        <span class="keyword">if</span>(cache.hasOwnProperty(args))&#123;<span class="comment">//等价 args in cache</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'使用缓存结果'</span>);</span><br><span class="line">            <span class="keyword">return</span> cache[args];<span class="comment">//直接使用缓存对象的“值”</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'计算结果'</span>);</span><br><span class="line">        <span class="keyword">return</span> cache[args] = newTarget(<span class="built_in">arguments</span>);<span class="comment">//使用本体函数计算结果并加入缓存</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-08-09T05:24:32.368Z" itemprop="dateUpdated">2020-08-09 13:24:32</time>
+</span><br>
+
+
+        
+        版权声明：本文为博主原创文章，转载请注明出处：<a href="/QiqiM.github.io/2020/07/06/设计模式/代理模式/" target="_blank" rel="external">https://github.com/QiqiM/2020/07/06/设计模式/代理模式/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/QiqiM">
+            <img src="/QiqiM.github.io/img/avatar1.jpg" alt="yato">
+            yato
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/结构型模式/">结构型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/&title=《代理模式》 — yato&pic=https://github.com/QiqiM/img/avatar1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/&title=《代理模式》 — yato&source=勤学如春起之苗,不见其增,日有所长" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代理模式》 — yato&url=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/&via=https://github.com/QiqiM" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/QiqiM.github.io/2020/07/07/设计模式/策略模式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">策略模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/QiqiM.github.io/2020/07/06/设计模式/建造者模式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">建造者模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        赠人玫瑰，手有余香
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/QiqiM.github.io/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/QiqiM.github.io/img/wechat.png" data-alipay="/QiqiM.github.io/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/QiqiM.github.io/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>yato &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/&title=《代理模式》 — yato&pic=https://github.com/QiqiM/img/avatar1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/&title=《代理模式》 — yato&source=勤学如春起之苗,不见其增,日有所长" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代理模式》 — yato&url=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/&via=https://github.com/QiqiM" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/QiqiM/2020/07/06/设计模式/代理模式/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/QiqiM.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

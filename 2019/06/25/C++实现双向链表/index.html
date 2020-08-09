@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>C++实现双向链表 | yato | 苟有恒,何必三更起五更眠; 最无益,莫过一日曝十日寒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="algorithm,C++,LinkList">
+    <meta name="description" content="双向链表(双链表)是链表的一种。和单链表一样，双链表也是由节点组成，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表。">
+<meta name="keywords" content="algorithm,C++,LinkList">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++实现双向链表">
+<meta property="og:url" content="https://github.com/QiqiM/2019/06/25/C++实现双向链表/index.html">
+<meta property="og:site_name" content="yato">
+<meta property="og:description" content="双向链表(双链表)是链表的一种。和单链表一样，双链表也是由节点组成，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-09T05:24:32.368Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++实现双向链表">
+<meta name="twitter:description" content="双向链表(双链表)是链表的一种。和单链表一样，双链表也是由节点组成，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表。">
+    
+        <link rel="alternate" type="application/atom+xml" title="yato" href="/QiqiM.github.io/atom.xml">
+    
+    <link rel="shortcut icon" href="/QiqiM.github.io/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/QiqiM.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/QiqiM.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/QiqiM.github.io/img/avatar1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">yato</h5>
+          <a href="mailto:2602231824@qq.com" title="2602231824@qq.com" class="mail">2602231824@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://qiqim.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://space.bilibili.com/25621747/#/favlist" target="_blank" >
+                <i class="icon icon-lg icon-bilibili"></i>
+                Bilibili
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">C++实现双向链表</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">C++实现双向链表</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-25T02:43:13.000Z" itemprop="datePublished" class="page-time">
+  2019-06-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#C-实现双向链表"><span class="post-toc-number">1.</span> <span class="post-toc-text">C++实现双向链表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#双向链表测试文件-LinkList-cpp"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">双向链表测试文件(LinkList.cpp)</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="_post-C++实现双向链表"
+  class="post-article article-type-_post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">C++实现双向链表</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-25 10:43:13" datetime="2019-06-25T02:43:13.000Z"  itemprop="datePublished">2019-06-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>　　双向链表(双链表)是链表的一种。和单链表一样，双链表也是由节点组成，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表。<br><a id="more"></a></p>
+<h3 id="C-实现双向链表"><a href="#C-实现双向链表" class="headerlink" title="C++实现双向链表"></a>C++实现双向链表</h3><p>双向链表头文件(LinkList.h)<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _LINK_LIST_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LINK_LIST_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">DNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		T value;</span><br><span class="line">		DNode *prev;</span><br><span class="line">		DNode *next;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		DNode() &#123;&#125;</span><br><span class="line">		DNode(T t, DNode *prev, DNode *next) &#123;</span><br><span class="line">			<span class="keyword">this</span>-&gt;value = t;</span><br><span class="line">			<span class="keyword">this</span>-&gt;prev = prev;</span><br><span class="line">			<span class="keyword">this</span>-&gt;next = next;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">DoubleLink</span> &#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		DoubleLink();</span><br><span class="line">		~DoubleLink();</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">		<span class="function">T <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line">		<span class="function">T <span class="title">getFirst</span><span class="params">()</span></span>;</span><br><span class="line">		<span class="function">T <span class="title">getLast</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> index, T t)</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">insertFirst</span><span class="params">(T t)</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">appendLast</span><span class="params">(T t)</span></span>;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">delFirst</span><span class="params">()</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">delLast</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> count;</span><br><span class="line">		DNode&lt;T&gt; *pHead;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		DNode&lt;T&gt; *getNode(<span class="keyword">int</span> index);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">DoubleLink</span>&lt;T&gt;:</span>:DoubleLink() : count(<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 创建表头。注意：表头没有存储数据</span></span><br><span class="line">	pHead = <span class="keyword">new</span> DNode&lt;T&gt;();</span><br><span class="line">	pHead-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 析构函数</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">DoubleLink</span>&lt;T&gt;:</span>:~DoubleLink()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 删除所有结点</span></span><br><span class="line">	DNode&lt;T&gt;* pTemp;</span><br><span class="line">	DNode&lt;T&gt;* pNode = pHead-&gt;next;</span><br><span class="line">	<span class="keyword">while</span> (pNode != pHead) </span><br><span class="line">	&#123;</span><br><span class="line">		pTemp = pNode;</span><br><span class="line">		pNode = pNode-&gt;next;</span><br><span class="line">		<span class="keyword">delete</span> pTemp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 删除表头</span></span><br><span class="line">	<span class="keyword">delete</span> pHead;</span><br><span class="line">	pHead = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回结点数目</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:isEmpty()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> count == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回节点数目</span></span><br><span class="line"><span class="keyword">template</span> &lt; <span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:size()</span><br><span class="line">&#123;   </span><br><span class="line">	<span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取index位置的结点</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">DNode</span>&lt;T&gt;* <span class="title">DoubleLink</span>&lt;T&gt;:</span>:getNode(<span class="keyword">int</span> index)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 判断参数有效性</span></span><br><span class="line">	<span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= count)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">" getNode failed! the index is out of round"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//  正向查找， 查找优化，减少查找次数</span></span><br><span class="line">	<span class="keyword">if</span> (index &lt;= count / <span class="number">2</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">		DNode&lt;T&gt;* pIndex = pHead-&gt;next;</span><br><span class="line">		<span class="keyword">while</span> (i++ &lt; index)</span><br><span class="line">		&#123;</span><br><span class="line">			pIndex = pIndex-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> pIndex;</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="comment">// 反向查找</span></span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> rIndex = count - index - <span class="number">1</span>;</span><br><span class="line">	DNode&lt;T&gt;* pRindex = pHead-&gt;prev;</span><br><span class="line">	<span class="keyword">while</span> (j++ &lt; rIndex)</span><br><span class="line">	&#123;</span><br><span class="line">		pRindex = pRindex-&gt;prev;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> pRindex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取第index位置的结点的值</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:get(<span class="keyword">int</span> index)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> getNode(index)-&gt;value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取第一个结点的值</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:getLast()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> getNode(count<span class="number">-1</span>)-&gt;value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取最后一个结点的值</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">T</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:getFirst()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> getNode(<span class="number">0</span>)-&gt;value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将结点插入到第index位置之前</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:insert(<span class="keyword">int</span> index, T t)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (index == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> insertFirst(t);</span><br><span class="line"></span><br><span class="line">	DNode&lt;T&gt;* pIndex = getNode(index);</span><br><span class="line">	DNode&lt;T&gt;* pNode = <span class="keyword">new</span> DNode&lt;T&gt;(t, pIndex-&gt;prev, pIndex);</span><br><span class="line">	pIndex-&gt;prev-&gt;next = pNode;</span><br><span class="line">	pIndex-&gt;prev = pNode;</span><br><span class="line">	count++;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将结点插入到第一个结点处</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:insertFirst(T t)</span><br><span class="line">&#123;</span><br><span class="line">	DNode&lt;T&gt;* pNode = <span class="keyword">new</span> DNode&lt;T&gt;(t, pHead, pHead-&gt;next);   <span class="comment">// 构造函数时就已经指定结点的前驱和后继结点了</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 这里第一个结点的时候需要判断空指针</span></span><br><span class="line">	<span class="keyword">if</span> (pHead-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">		pHead-&gt;prev = pNode;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		pHead-&gt;next-&gt;prev = pNode;</span><br><span class="line">	</span><br><span class="line">	pHead-&gt;next = pNode;</span><br><span class="line">	count++;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将结点追加到链表的末尾</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:appendLast(T t)</span><br><span class="line">&#123;</span><br><span class="line">	DNode&lt;T&gt;* pNode = <span class="keyword">new</span> DNode&lt;T&gt;(t, pHead-&gt;prev, pHead);</span><br><span class="line">	pHead-&gt;prev-&gt;next = pNode;</span><br><span class="line">	pHead-&gt;prev = pNode;</span><br><span class="line">	count++;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除index位置的结点</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:del(<span class="keyword">int</span> index)</span><br><span class="line">&#123;</span><br><span class="line">	DNode&lt;T&gt;* pIndex = getNode(index);</span><br><span class="line">	pIndex-&gt;next-&gt;prev = pIndex-&gt;prev;</span><br><span class="line">	pIndex-&gt;prev-&gt;next = pIndex-&gt;next;</span><br><span class="line">	<span class="keyword">delete</span> pIndex;</span><br><span class="line">	count--;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除第一个结点</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:delFirst()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> del(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除最后一个结点</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">int</span> <span class="title">DoubleLink</span>&lt;T&gt;:</span>:delLast()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> del(count - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !_LINK_LIST_H</span></span></span><br></pre></td></tr></table></figure></p>
+<h4 id="双向链表测试文件-LinkList-cpp"><a href="#双向链表测试文件-LinkList-cpp" class="headerlink" title="双向链表测试文件(LinkList.cpp)"></a>双向链表测试文件(LinkList.cpp)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"pch.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LinkList.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 双向链表操作int数据</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">intTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> intArr[<span class="number">4</span>] = &#123; <span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\n -------------intTest------------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建双向链表</span></span><br><span class="line">	DoubleLink&lt;<span class="keyword">int</span>&gt;* pDlinkList = <span class="keyword">new</span> DoubleLink&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line"></span><br><span class="line">	pDlinkList-&gt;insert(<span class="number">0</span>, <span class="number">20</span>);</span><br><span class="line">	pDlinkList-&gt;appendLast(<span class="number">10</span>);</span><br><span class="line">	pDlinkList-&gt;insertFirst(<span class="number">30</span>);</span><br><span class="line">	pDlinkList-&gt;insert(<span class="number">1</span>, <span class="number">40</span>);</span><br><span class="line">	pDlinkList-&gt;delFirst();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 双向链表是否为空</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"isEmpty= "</span> &lt;&lt; pDlinkList-&gt;isEmpty() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 双向链表的长度</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"size="</span> &lt;&lt; pDlinkList-&gt;size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打印双向链表的全部数据</span></span><br><span class="line">	<span class="keyword">int</span> length = pDlinkList-&gt;size();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"pDlinkList("</span> &lt;&lt; i &lt;&lt; <span class="string">")="</span> &lt;&lt; pDlinkList-&gt;get(i) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stringTest</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> sArr[<span class="number">4</span>] = &#123; <span class="string">"ten"</span>,<span class="string">"tewnty"</span>,<span class="string">"thirty"</span>,<span class="string">"forty"</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\n------------stringTest-----------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	DoubleLink&lt;<span class="built_in">string</span>&gt;* pDlinkList = <span class="keyword">new</span> DoubleLink&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"></span><br><span class="line">	pDlinkList-&gt;insert(<span class="number">0</span>, sArr[<span class="number">1</span>]);</span><br><span class="line">	pDlinkList-&gt;appendLast(sArr[<span class="number">0</span>]);</span><br><span class="line">	pDlinkList-&gt;insertFirst(sArr[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 双向链表是否为空</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"isEmpty()="</span> &lt;&lt; pDlinkList-&gt;isEmpty() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 双向链表的长度</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"size="</span> &lt;&lt; pDlinkList-&gt;size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打印双向链表的全部数据</span></span><br><span class="line">	<span class="keyword">int</span> length = pDlinkList-&gt;size();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"pDlinkList("</span> &lt;&lt; i &lt;&lt; <span class="string">")="</span> &lt;&lt; pDlinkList-&gt;get(i) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> stu stuArr[] = </span><br><span class="line">&#123; </span><br><span class="line">	&#123;<span class="number">10</span>,<span class="string">"one"</span>&#125;,</span><br><span class="line">	&#123;<span class="number">20</span>,<span class="string">"two"</span>&#125;,</span><br><span class="line">	&#123;<span class="number">30</span>,<span class="string">"three"</span>&#125;,</span><br><span class="line">	&#123;<span class="number">40</span>,<span class="string">"four"</span>&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ARR_STU_SIZE ((sizeof(stuArr)) / (sizeof(stuArr[0])))</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">objectTest</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"\n------------stringTest-----------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	DoubleLink&lt;stu&gt;* pDlinkList = <span class="keyword">new</span> DoubleLink&lt;stu&gt;();</span><br><span class="line"></span><br><span class="line">	pDlinkList-&gt;insert(<span class="number">0</span>, stuArr[<span class="number">1</span>]);</span><br><span class="line">	pDlinkList-&gt;appendLast(stuArr[<span class="number">0</span>]);</span><br><span class="line">	pDlinkList-&gt;insertFirst(stuArr[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 双向链表是否为空</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"isEmpty()="</span> &lt;&lt; pDlinkList-&gt;isEmpty() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 双向链表的长度</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"size="</span> &lt;&lt; pDlinkList-&gt;size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打印双向链表的全部数据</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">stu</span> <span class="title">p</span>;</span></span><br><span class="line">	<span class="keyword">int</span> length = pDlinkList-&gt;size();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p = pDlinkList-&gt;get(i);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"pDlinkList("</span> &lt;&lt; i &lt;&lt; <span class="string">")=["</span> &lt;&lt; p.id &lt;&lt;<span class="string">" ,"</span> &lt;&lt; p.name&lt;&lt;<span class="string">"]"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	intTest();</span><br><span class="line">	stringTest();</span><br><span class="line">	objectTest();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　此文实现<a href="https://www.cnblogs.com/skywang12345/p/3561803.html" target="_blank" rel="noopener">参考</a>,侵权必删，大佬的有一些错误，经过测试已经修改。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-08-09T05:24:32.368Z" itemprop="dateUpdated">2020-08-09 13:24:32</time>
+</span><br>
+
+
+        
+        版权声明：本文为博主原创文章，转载请注明出处：<a href="/QiqiM.github.io/2019/06/25/C++实现双向链表/" target="_blank" rel="external">https://github.com/QiqiM/2019/06/25/C++实现双向链表/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/QiqiM">
+            <img src="/QiqiM.github.io/img/avatar1.jpg" alt="yato">
+            yato
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/LinkList/">LinkList</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/algorithm/">algorithm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/QiqiM/2019/06/25/C++实现双向链表/&title=《C++实现双向链表》 — yato&pic=https://github.com/QiqiM/img/avatar1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/QiqiM/2019/06/25/C++实现双向链表/&title=《C++实现双向链表》 — yato&source=　　双向链表(双链表)是链表的一种。和单链表一样，双链表也是由节点组成，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QiqiM/2019/06/25/C++实现双向链表/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C++实现双向链表》 — yato&url=https://github.com/QiqiM/2019/06/25/C++实现双向链表/&via=https://github.com/QiqiM" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/QiqiM/2019/06/25/C++实现双向链表/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/QiqiM.github.io/2020/02/26/深入js系列/模拟实现js的bind方法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">模拟实现js的bind方法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/QiqiM.github.io/2019/06/12/常见排序算法1--冒泡排序/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">常见排序算法1-冒泡排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        赠人玫瑰，手有余香
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/QiqiM.github.io/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/QiqiM.github.io/img/wechat.png" data-alipay="/QiqiM.github.io/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/QiqiM.github.io/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>yato &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/QiqiM/2019/06/25/C++实现双向链表/&title=《C++实现双向链表》 — yato&pic=https://github.com/QiqiM/img/avatar1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/QiqiM/2019/06/25/C++实现双向链表/&title=《C++实现双向链表》 — yato&source=　　双向链表(双链表)是链表的一种。和单链表一样，双链表也是由节点组成，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QiqiM/2019/06/25/C++实现双向链表/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C++实现双向链表》 — yato&url=https://github.com/QiqiM/2019/06/25/C++实现双向链表/&via=https://github.com/QiqiM" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/QiqiM/2019/06/25/C++实现双向链表/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/QiqiM/2019/06/25/C++实现双向链表/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/QiqiM.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

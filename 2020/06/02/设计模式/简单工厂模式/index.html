@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>简单工厂模式 | yato | 苟有恒,何必三更起五更眠; 最无益,莫过一日曝十日寒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计模式,js,创建型模式">
+    <meta name="description" content="概念也可以叫静态工厂模式，用一个工厂对象创建同一类对象类的实例。现实生活中，用户在平台还是分等级的，角色不同，权限也不同。 实现12345678910111213141516171819202122232425262728293031323334353637383940414243class Role &amp;#123;    constructor(options) &amp;#123;        thi">
+<meta name="keywords" content="设计模式,js,创建型模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单工厂模式">
+<meta property="og:url" content="https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/index.html">
+<meta property="og:site_name" content="yato">
+<meta property="og:description" content="概念也可以叫静态工厂模式，用一个工厂对象创建同一类对象类的实例。现实生活中，用户在平台还是分等级的，角色不同，权限也不同。 实现12345678910111213141516171819202122232425262728293031323334353637383940414243class Role &amp;#123;    constructor(options) &amp;#123;        thi">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-09T05:24:32.372Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单工厂模式">
+<meta name="twitter:description" content="概念也可以叫静态工厂模式，用一个工厂对象创建同一类对象类的实例。现实生活中，用户在平台还是分等级的，角色不同，权限也不同。 实现12345678910111213141516171819202122232425262728293031323334353637383940414243class Role &amp;#123;    constructor(options) &amp;#123;        thi">
+    
+        <link rel="alternate" type="application/atom+xml" title="yato" href="/QiqiM.github.io/atom.xml">
+    
+    <link rel="shortcut icon" href="/QiqiM.github.io/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/QiqiM.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/QiqiM.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/QiqiM.github.io/img/avatar1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">yato</h5>
+          <a href="mailto:2602231824@qq.com" title="2602231824@qq.com" class="mail">2602231824@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://qiqim.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://space.bilibili.com/25621747/#/favlist" target="_blank" >
+                <i class="icon icon-lg icon-bilibili"></i>
+                Bilibili
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">简单工厂模式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">简单工厂模式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-06-02T08:18:03.000Z" itemprop="datePublished" class="page-time">
+  2020-06-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/QiqiM.github.io/categories/设计模式/">设计模式</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#工厂方法模式"><span class="post-toc-number">3.</span> <span class="post-toc-text">工厂方法模式</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-设计模式/简单工厂模式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">简单工厂模式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-06-02 16:18:03" datetime="2020-06-02T08:18:03.000Z"  itemprop="datePublished">2020-06-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/QiqiM.github.io/categories/设计模式/">设计模式</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>也可以叫静态工厂模式，用一个工厂对象创建同一类对象类的实例。现实生活中，用户在平台还是分等级的，角色不同，权限也不同。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(options) &#123;</span><br><span class="line">        <span class="keyword">this</span>.role = options.role;</span><br><span class="line">        <span class="keyword">this</span>.permissions = options.permissions;</span><br><span class="line">    &#125;</span><br><span class="line">    show() &#123;</span><br><span class="line">        <span class="keyword">const</span> str = <span class="string">`you are <span class="subst">$&#123;<span class="keyword">this</span>.role&#125;</span>, permissions：<span class="subst">$&#123;<span class="keyword">this</span>.permissions.join(<span class="string">', '</span>)&#125;</span>`</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SampleFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(role) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="keyword">this</span>[role] !== <span class="string">'function'</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'param just can is admin or developer'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>[role]();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    admin() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Role(&#123;</span><br><span class="line">            role: <span class="string">'admin'</span>,</span><br><span class="line">            permissions: [<span class="string">'write'</span>, <span class="string">'read'</span>, <span class="string">'add'</span>, <span class="string">'create'</span>]</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    developer() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Role(&#123;</span><br><span class="line">            role: <span class="string">'admin'</span>,</span><br><span class="line">            permissions: [<span class="string">'develop'</span>, <span class="string">'push'</span>, <span class="string">'ask'</span>]</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例</span></span><br><span class="line"><span class="keyword">const</span> xm = <span class="keyword">new</span> SampleFactory(<span class="string">'admin'</span>);</span><br><span class="line">xm.show();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> xh = <span class="keyword">new</span> SampleFactory(<span class="string">'developer'</span>);</span><br><span class="line">xh.show();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> xl = <span class="keyword">new</span> SampleFactory(<span class="string">'guest'</span>);</span><br><span class="line">xl.show();</span><br></pre></td></tr></table></figure>
+<p>上例中，<code>sampleFactory</code> 就是一个简单工厂，2个实例对应不同的权限，调用工厂函数时，只需传递 <code>admin</code> 或 <code>developer</code> 就可获取对应的实例对象。</p>
+<p>1.简单工厂函数适用场景</p>
+<ul>
+<li>正确传参，就可以获取所需要的对象，无需知道内部实现细节；</li>
+<li>内部逻辑（工厂函数）通过传入参数判断实例化还是使用哪些类；</li>
+<li>创建对象数量少（稳定），对象的创建逻辑不复杂；</li>
+</ul>
+<p>2.简单工厂函数不适用场景</p>
+<ul>
+<li>当需要添加新的类时，就需要修改工厂方法，这违背了开放封闭原则（OCP, 对扩展开放、对源码修改封闭）。正所谓成也萧何败也萧何。函数 <code>create</code> 内包含了所有创建对象（构造函数）的判断逻辑代码，如果要增加新的构造函数还需要修改函数 <code>create</code>（判断逻辑代码），当可选参数 <code>role</code> 变得更多时，那函数 <code>create</code> 的判断逻辑代码就变得臃肿起来，难以维护。</li>
+<li>不适用创建多类对象；</li>
+</ul>
+<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><p>将实际创建对象工作推迟到子类当中，核心类就成了抽象类。这样添加新的类时就无需修改工厂方法，只需要将子类注册进工厂方法的原型对象中即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 基础人模板</span></span><br><span class="line">    name = <span class="string">"基础人模板"</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">      <span class="keyword">this</span>.name = props.name;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">extends</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 程序员</span></span><br><span class="line">    programmingLanguage = <span class="string">"JavaScript"</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">      <span class="keyword">super</span>(props);</span><br><span class="line">      <span class="keyword">this</span>.programmingLanguage = props.programmingLanguage;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Driver</span> <span class="keyword">extends</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 司机</span></span><br><span class="line">    driverLicense = <span class="string">"无证老司机"</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">      <span class="keyword">super</span>(props);</span><br><span class="line">      <span class="keyword">this</span>.driverLicense = props.driverLicense;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Chef</span> <span class="keyword">extends</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 厨师</span></span><br><span class="line">    cookCard = <span class="string">"无证"</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">      <span class="keyword">super</span>(props);</span><br><span class="line">      <span class="keyword">this</span>.cookCard = props.cookCard;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">PeopleFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> createProgrammer(props) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Programmer(props);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> createDriver(props) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Driver(props);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> createChef(props) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Chef(props);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> unlicensedDriver = PeopleFactory.createDriver(&#123;</span><br><span class="line">    name: <span class="string">"老司机"</span>,</span><br><span class="line">    driverLicense: <span class="string">"A1"</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="built_in">console</span>.log(unlicensedDriver);  <span class="comment">// Driver &#123; name: '老司机', driverLicense: 'A1' &#125;</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-08-09T05:24:32.372Z" itemprop="dateUpdated">2020-08-09 13:24:32</time>
+</span><br>
+
+
+        
+        版权声明：本文为博主原创文章，转载请注明出处：<a href="/QiqiM.github.io/2020/06/02/设计模式/简单工厂模式/" target="_blank" rel="external">https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/QiqiM">
+            <img src="/QiqiM.github.io/img/avatar1.jpg" alt="yato">
+            yato
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/创建型模式/">创建型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/设计模式/">设计模式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/&title=《简单工厂模式》 — yato&pic=https://github.com/QiqiM/img/avatar1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/&title=《简单工厂模式》 — yato&source=勤学如春起之苗,不见其增,日有所长" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《简单工厂模式》 — yato&url=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/&via=https://github.com/QiqiM" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/QiqiM.github.io/2020/06/05/深入js系列/深入理解Node事件循环/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">什么是事件循环（Event Loop）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/QiqiM.github.io/2020/06/02/设计模式/抽象工厂模式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">抽象工厂模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        赠人玫瑰，手有余香
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/QiqiM.github.io/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/QiqiM.github.io/img/wechat.png" data-alipay="/QiqiM.github.io/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/QiqiM.github.io/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>yato &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/&title=《简单工厂模式》 — yato&pic=https://github.com/QiqiM/img/avatar1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/&title=《简单工厂模式》 — yato&source=勤学如春起之苗,不见其增,日有所长" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《简单工厂模式》 — yato&url=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/&via=https://github.com/QiqiM" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/QiqiM/2020/06/02/设计模式/简单工厂模式/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/QiqiM.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

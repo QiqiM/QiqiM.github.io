@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>php array | yato | 苟有恒,何必三更起五更眠; 最无益,莫过一日曝十日寒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="php,array">
+    <meta name="description" content="1.php中如何循环二维数组在php中，采用foreach循环来对二维索引数组进行遍历,下面的例子演示如何将三个关联数组，通过公有的key,在例子中是gid;组合成一个关联数组。">
+<meta name="keywords" content="php,array">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php array">
+<meta property="og:url" content="https://github.com/QiqiM/2018/12/15/php-array/index.html">
+<meta property="og:site_name" content="yato">
+<meta property="og:description" content="1.php中如何循环二维数组在php中，采用foreach循环来对二维索引数组进行遍历,下面的例子演示如何将三个关联数组，通过公有的key,在例子中是gid;组合成一个关联数组。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-09T05:24:32.368Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php array">
+<meta name="twitter:description" content="1.php中如何循环二维数组在php中，采用foreach循环来对二维索引数组进行遍历,下面的例子演示如何将三个关联数组，通过公有的key,在例子中是gid;组合成一个关联数组。">
+    
+        <link rel="alternate" type="application/atom+xml" title="yato" href="/QiqiM.github.io/atom.xml">
+    
+    <link rel="shortcut icon" href="/QiqiM.github.io/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/QiqiM.github.io/img/brand.jpg)">
+      <div class="brand">
+        <a href="/QiqiM.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/QiqiM.github.io/img/avatar1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">yato</h5>
+          <a href="mailto:2602231824@qq.com" title="2602231824@qq.com" class="mail">2602231824@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/QiqiM.github.io/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://qiqim.github.io/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://space.bilibili.com/25621747/#/favlist" target="_blank" >
+                <i class="icon icon-lg icon-bilibili"></i>
+                Bilibili
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">php array</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">php array</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-15T09:32:01.000Z" itemprop="datePublished" class="page-time">
+  2018-12-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-php中如何循环二维数组"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.php中如何循环二维数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#a-初始化数据"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">a.初始化数据</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#b-构造数据-将公有key提取出来作为key值索引"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">b.构造数据(将公有key提取出来作为key值索引)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#c-将构造好的数据组合起来-通过公有key来取roleresult和serverresult的value"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">c.将构造好的数据组合起来(通过公有key来取roleresult和serverresult的value)</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-最后附一个在线测试代码的网站"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.最后附一个在线测试代码的网站</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-php-array"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">php array</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-15 17:32:01" datetime="2018-12-15T09:32:01.000Z"  itemprop="datePublished">2018-12-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="1-php中如何循环二维数组"><a href="#1-php中如何循环二维数组" class="headerlink" title="1.php中如何循环二维数组"></a>1.php中如何循环二维数组</h3><p>在php中，采用foreach循环来对二维索引数组进行遍历,下面的例子演示如何将三个关联数组，通过公有的key,在例子中是gid;组合成一个关联数组。<br><a id="more"></a></p>
+<h4 id="a-初始化数据"><a href="#a-初始化数据" class="headerlink" title="a.初始化数据"></a>a.初始化数据</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">$paylist = <span class="keyword">array</span>(</span><br><span class="line">    <span class="number">0</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">1</span>,</span><br><span class="line">        <span class="string">'money'</span>=&gt; <span class="string">'100'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">1</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">1</span>,</span><br><span class="line">        <span class="string">'money'</span>=&gt; <span class="string">'200'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">2</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">4</span>,</span><br><span class="line">        <span class="string">'money'</span>=&gt; <span class="string">'300'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">3</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">6</span>,</span><br><span class="line">        <span class="string">'money'</span>=&gt; <span class="string">'400'</span></span><br><span class="line">    ),  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$rolelist = <span class="keyword">array</span>(</span><br><span class="line">    <span class="number">0</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">1</span>,</span><br><span class="line">        <span class="string">'name'</span>=&gt; <span class="string">'xx1'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">1</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">2</span>,</span><br><span class="line">        <span class="string">'name'</span>=&gt; <span class="string">'xx2'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">2</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">4</span>,</span><br><span class="line">        <span class="string">'name'</span>=&gt; <span class="string">'xx4'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">3</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">6</span>,</span><br><span class="line">        <span class="string">'name'</span>=&gt; <span class="string">'xx6'</span></span><br><span class="line">    ),  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$serverlist = <span class="keyword">array</span>(</span><br><span class="line">    <span class="number">0</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">1</span>,</span><br><span class="line">        <span class="string">'servername'</span>=&gt; <span class="string">'s1'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">1</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">2</span>,</span><br><span class="line">        <span class="string">'servername'</span>=&gt; <span class="string">'s2'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">2</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">4</span>,</span><br><span class="line">        <span class="string">'servername'</span>=&gt; <span class="string">'s4'</span></span><br><span class="line">    ),  </span><br><span class="line">    <span class="number">3</span>=&gt;<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'gid'</span>=&gt; <span class="number">6</span>,</span><br><span class="line">        <span class="string">'servername'</span>=&gt; <span class="string">'s4'</span></span><br><span class="line">    ),  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$gsidarr = <span class="keyword">array</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>);</span><br><span class="line"><span class="comment">//去重排序</span></span><br><span class="line">$gsidarr = array_unique($gsidarr);</span><br><span class="line">$gsidarr = array_values($gsidarr);</span><br></pre></td></tr></table></figure>
+<h4 id="b-构造数据-将公有key提取出来作为key值索引"><a href="#b-构造数据-将公有key提取出来作为key值索引" class="headerlink" title="b.构造数据(将公有key提取出来作为key值索引)"></a>b.构造数据(将公有key提取出来作为key值索引)</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$roleresult = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span>($rolelist <span class="keyword">as</span> $key =&gt; $value)&#123;</span><br><span class="line">    $roleresult[$value[<span class="string">'gid'</span>]] = $value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;/br&gt;----'</span>.json_encode($roleresult).<span class="string">'&lt;/br&gt;'</span>;</span><br><span class="line"><span class="keyword">foreach</span>($roleresult <span class="keyword">as</span> $k=&gt;$v)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $v[<span class="string">'name'</span>].<span class="string">'==&gt;'</span>.$v[<span class="string">'gid'</span>].<span class="string">'--&lt;/br&gt;'</span>;  <span class="comment">//打印一下构造之后的数据</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构造之后的数据roleresult</span></span><br><span class="line"><span class="comment">//&#123;"1":&#123;"gid":1,"name":"xx1"&#125;,"2":&#123;"gid":2,"name":"xx2"&#125;,"4":&#123;"gid":4,"name":"xx4"&#125;,"6":&#123;"gid":6,"name":"xx6"&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">$serresult = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span>($serverlist <span class="keyword">as</span> $key =&gt; $value)&#123;</span><br><span class="line">    $serresult[$value[<span class="string">'gid'</span>]] = $value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;/br&gt;----'</span>.json_encode($serresult).<span class="string">'&lt;/br&gt;'</span>;</span><br><span class="line"><span class="keyword">foreach</span>($serresult <span class="keyword">as</span> $k=&gt;$v)&#123;</span><br><span class="line">        <span class="keyword">echo</span> $v[<span class="string">'servername'</span>].<span class="string">'==&gt;'</span>.$v[<span class="string">'gid'</span>].<span class="string">'--&lt;/br&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 构造之后的数据serverresult</span></span><br><span class="line"><span class="comment">// &#123;"1":&#123;"gid":1,"servername":"s1"&#125;,"2":&#123;"gid":2,"servername":"s2"&#125;,"4":&#123;"gid":4,"servername":"s4"&#125;,"6":&#123;"gid":6,"servername":"s4"&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="c-将构造好的数据组合起来-通过公有key来取roleresult和serverresult的value"><a href="#c-将构造好的数据组合起来-通过公有key来取roleresult和serverresult的value" class="headerlink" title="c.将构造好的数据组合起来(通过公有key来取roleresult和serverresult的value)"></a>c.将构造好的数据组合起来(通过公有key来取roleresult和serverresult的value)</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ret = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span>($paylist <span class="keyword">as</span> $v)&#123;</span><br><span class="line">    $data = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'money'</span>=&gt;$v[<span class="string">'money'</span>],</span><br><span class="line">            <span class="string">'gid'</span>=&gt;$v[<span class="string">'gid'</span>],</span><br><span class="line">            <span class="string">'name'</span>=&gt;$roleresult[$v[<span class="string">'gid'</span>]][<span class="string">'name'</span>],</span><br><span class="line">            <span class="string">'servername'</span>=&gt;$serresult[$v[<span class="string">'gid'</span>]][<span class="string">'servername'</span>]</span><br><span class="line">        );</span><br><span class="line">        array_push($ret,$data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//组装好之后的数据</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    [&#123;"money":"100","gid":1,"name":"xx1","servername":"s1"&#125;,&#123;"money":"200", </span></span><br><span class="line"><span class="comment">    "gid":1,"name":"xx1","servername":"s1"&#125;,&#123;"money":"300","gid":4,</span></span><br><span class="line"><span class="comment">    "name":"xx4","servername":"s4"&#125;,&#123;"money":"400","gid":6,"name":"xx6",</span></span><br><span class="line"><span class="comment">    "servername":"s4"&#125;]</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;/br&gt;----'</span>.json_encode($ret).<span class="string">'&lt;/br&gt;'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2-最后附一个在线测试代码的网站"><a href="#2-最后附一个在线测试代码的网站" class="headerlink" title="2.最后附一个在线测试代码的网站"></a>2.最后附一个在线测试代码的网站</h3><p><a href="https://www.dooccn.com/php/" target="_blank" rel="noopener">在线测试网站</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-08-09T05:24:32.368Z" itemprop="dateUpdated">2020-08-09 13:24:32</time>
+</span><br>
+
+
+        
+        版权声明：本文为博主原创文章，转载请注明出处：<a href="/QiqiM.github.io/2018/12/15/php-array/" target="_blank" rel="external">https://github.com/QiqiM/2018/12/15/php-array/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/QiqiM">
+            <img src="/QiqiM.github.io/img/avatar1.jpg" alt="yato">
+            yato
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/QiqiM.github.io/tags/php/">php</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/QiqiM/2018/12/15/php-array/&title=《php array》 — yato&pic=https://github.com/QiqiM/img/avatar1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/QiqiM/2018/12/15/php-array/&title=《php array》 — yato&source=1.php中如何循环二维数组在php中，采用foreach循环来对二维索引数组进行遍历,下面的例子演示如何将三个关联数组，通过公有的key,在例子中是gi..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QiqiM/2018/12/15/php-array/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《php array》 — yato&url=https://github.com/QiqiM/2018/12/15/php-array/&via=https://github.com/QiqiM" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/QiqiM/2018/12/15/php-array/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/QiqiM.github.io/2018/12/19/历史过程/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">历史过程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/QiqiM.github.io/2018/11/19/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        赠人玫瑰，手有余香
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/QiqiM.github.io/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/QiqiM.github.io/img/wechat.png" data-alipay="/QiqiM.github.io/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/QiqiM.github.io/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>yato &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/QiqiM/2018/12/15/php-array/&title=《php array》 — yato&pic=https://github.com/QiqiM/img/avatar1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/QiqiM/2018/12/15/php-array/&title=《php array》 — yato&source=1.php中如何循环二维数组在php中，采用foreach循环来对二维索引数组进行遍历,下面的例子演示如何将三个关联数组，通过公有的key,在例子中是gi..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QiqiM/2018/12/15/php-array/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《php array》 — yato&url=https://github.com/QiqiM/2018/12/15/php-array/&via=https://github.com/QiqiM" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/QiqiM/2018/12/15/php-array/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/QiqiM/2018/12/15/php-array/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/QiqiM.github.io/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
